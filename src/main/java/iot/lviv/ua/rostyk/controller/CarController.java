@@ -62,7 +62,7 @@ public class CarController {
     }
 
     @DeleteMapping(value = "/{carId}")
-    public ResponseEntity<?> deleteBook(@PathVariable Integer carId) {
+    public ResponseEntity<?> deleteCar(@PathVariable Integer carId) {
         carService.delete(carId);
         return new ResponseEntity<>(HttpStatus.OK);
     }

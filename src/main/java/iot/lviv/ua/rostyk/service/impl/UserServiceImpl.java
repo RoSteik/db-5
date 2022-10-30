@@ -9,7 +9,7 @@ package iot.lviv.ua.rostyk.service.impl;
 
 
 import iot.lviv.ua.rostyk.domain.User;
-import iot.lviv.ua.rostyk.exception.CarNotFoundException;
+import iot.lviv.ua.rostyk.exception.UserNotFoundException;
 import iot.lviv.ua.rostyk.repository.UserRepository;
 import iot.lviv.ua.rostyk.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findById(Integer id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new CarNotFoundException(id));
+                .orElseThrow(() -> new UserNotFoundException(id));
     }
 
     @Transactional
@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void update(Integer id, User uUser) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new CarNotFoundException(id));
+                .orElseThrow(() -> new UserNotFoundException(id));
         //update
         user.setName(uUser.getName());
         user.setRating(uUser.getRating());
@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void delete(Integer id) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new CarNotFoundException(id));
+                .orElseThrow(() -> new UserNotFoundException(id));
         userRepository.delete(user);
     }
 }
