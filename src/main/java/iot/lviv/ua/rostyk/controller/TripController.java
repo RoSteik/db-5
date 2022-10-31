@@ -13,11 +13,15 @@ import iot.lviv.ua.rostyk.dto.assembler.TripDtoAssembler;
 import iot.lviv.ua.rostyk.service.TripService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 
 @RestController
@@ -41,6 +45,17 @@ public class TripController {
         Trip trip = tripService.findById(tripId);
         TripDto tripDto = tripDtoAssembler.toModel(trip);
         return new ResponseEntity<>(tripDto, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "drivers/{driverId}")
+    public ResponseEntity<CollectionModel<TripDto>> getTripsByDriverId(
+            @PathVariable Integer driverId) {
+        List<Trip> trips = tripService.findTripsByDriverId(driverId);
+        Link selfLink = linkTo(methodOn(TripController.class).getTripsByDriverId(driverId))
+                .withSelfRel();
+        CollectionModel<TripDto> tripDtos = tripDtoAssembler.
+                toCollectionModel(trips, selfLink);
+        return new ResponseEntity<>(tripDtos, HttpStatus.OK);
     }
 
     @PostMapping(value = "")

@@ -70,4 +70,10 @@ public class TripServiceImpl implements TripService {
     }
 
 
+    @Override
+    public List<Trip> findTripsByDriverId(Integer driverId) {
+        Driver driver = driverRepository.findById(driverId)
+                .orElseThrow(() -> new DriverNotFoundException(driverId));
+        return driver.getTrips();
+    }
 }

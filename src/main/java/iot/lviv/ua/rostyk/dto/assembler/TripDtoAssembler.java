@@ -34,9 +34,15 @@ public class TripDtoAssembler implements RepresentationModelAssembler<Trip, Trip
 
     @Override
     public CollectionModel<TripDto> toCollectionModel(Iterable<? extends Trip> entities) {
-        CollectionModel<TripDto> tripDto = RepresentationModelAssembler.super.toCollectionModel(entities);
+        CollectionModel<TripDto> tripDtos = RepresentationModelAssembler.super.toCollectionModel(entities);
         Link selfLink = linkTo(methodOn(TripController.class).getAllTrips()).withSelfRel();
-        tripDto.add(selfLink);
-        return tripDto;
+        tripDtos.add(selfLink);
+        return tripDtos;
+    }
+
+    public CollectionModel<TripDto> toCollectionModel(Iterable<? extends Trip> entities, Link link) {
+        CollectionModel<TripDto> tripDtos = RepresentationModelAssembler.super.toCollectionModel(entities);
+        tripDtos.add(link);
+        return tripDtos;
     }
 }

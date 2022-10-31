@@ -34,6 +34,9 @@ public class Driver {
     @JoinTable(name = "driver_has_car", schema = "rostyks", joinColumns = @JoinColumn(name = "driver_id", referencedColumnName = "id", nullable = false), inverseJoinColumns = @JoinColumn(name = "car_id", referencedColumnName = "id", nullable = false))
     private List<Car> cars;
 
+    @OneToMany(mappedBy = "driver")
+    private List<Trip> trips;
+
     public Integer getId() {
         return id;
     }
@@ -93,5 +96,13 @@ public class Driver {
 
     public void setCars(List<Car> cars) {
         this.cars = cars;
+    }
+
+    public List<Trip> getTrips() {
+        return trips;
+    }
+
+    public void setTrips(List<Trip> trips) {
+        this.trips = trips;
     }
 }

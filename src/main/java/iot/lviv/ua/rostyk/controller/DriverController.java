@@ -72,7 +72,7 @@ public class DriverController {
     }
 
     @DeleteMapping(value = "/{driverId}")
-    public ResponseEntity<?> deleteBook(@PathVariable Integer driverId) {
+    public ResponseEntity<?> deleteDriver(@PathVariable Integer driverId) {
         driverService.delete(driverId);
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -24,6 +24,7 @@ public class TripDto extends RepresentationModel<TripDto> {
     private Integer id;
     private String startPoint;
     private String endPoint;
-    private Long driverId;
-    private Long userId;
+    private String driver; // added
+//    private Long driverId;
+//    private Long userId;
 }

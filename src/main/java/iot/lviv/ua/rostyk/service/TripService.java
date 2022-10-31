@@ -8,5 +8,8 @@
 package iot.lviv.ua.rostyk.service;
 import iot.lviv.ua.rostyk.domain.Trip;
 
+import java.util.List;
+
 public interface TripService extends GeneralService<Trip, Integer> {
+    List<Trip> findTripsByDriverId(Integer driverId);
 }

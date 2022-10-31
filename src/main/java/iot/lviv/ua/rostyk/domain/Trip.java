@@ -22,12 +22,6 @@ public class Trip {
     @Basic
     @Column(name = "end_point")
     private String endPoint;
-//    @Basic
-//    @Column(name = "driver_id")
-//    private Long driverId;
-//    @Basic
-//    @Column(name = "user_id")
-//    private Long userId;
     @ManyToOne
     @JoinColumn(name = "driver_id", referencedColumnName = "id", nullable = false)
     private Driver driver;
