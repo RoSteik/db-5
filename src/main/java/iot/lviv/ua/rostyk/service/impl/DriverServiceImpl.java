@@ -24,6 +24,16 @@ public class DriverServiceImpl implements DriverService {
     DriverRepository driverRepository;
 
     @Override
+    public Integer getAverageRating() {
+        return driverRepository.getAverageRating();
+    }
+
+    @Override
+    public void addDriverHasCarRelationship(String driverName, String carBrand) {
+        driverRepository.addDriverHasCarRelationship(driverName, carBrand);
+    }
+
+    @Override
     public List<Car> findCarsByDriverId(Integer driverId) {
         Driver driver = driverRepository.findById(driverId)
                 .orElseThrow(() -> new DriverNotFoundException(driverId));

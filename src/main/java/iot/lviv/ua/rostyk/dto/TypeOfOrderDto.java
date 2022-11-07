@@ -2,7 +2,7 @@
  * @author RoSteik (Telegram: @RoSteik)
  * Project: rostyk
  * Package: iot.lviv.ua.rostyk.dto
- * Class: UserDto
+ * Class: TypeOfOrderDto
  */
 
 package iot.lviv.ua.rostyk.dto;
@@ -18,10 +18,8 @@ import org.springframework.hateoas.server.core.Relation;
 @Getter
 @EqualsAndHashCode(callSuper = false)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@Relation(itemRelation = "user", collectionRelation = "users")
-public class UserDto extends RepresentationModel<UserDto> {
-    private Integer id;
-    private String name;
-    private Integer rating;
-    private final Integer typeOfOrderId;
+@Relation(itemRelation = "typeOfOrder", collectionRelation = "typeOfOrders")
+public class TypeOfOrderDto extends RepresentationModel<TypeOfOrderDto> {
+    private final Integer id;
+    private final String name;
 }

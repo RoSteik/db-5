@@ -23,6 +23,11 @@ public class User {
     @Column(name = "rating")
     private Integer rating;
 
+    @Basic
+    @Column(name = "type_of_order_id")
+    private Integer typeOfOrderId;
+
+
     public Integer getId() {
         return id;
     }
@@ -58,5 +63,13 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, rating);
+    }
+
+    public Integer getTypeOfOrderId() {
+        return typeOfOrderId;
+    }
+
+    public void setTypeOfOrderId(Integer typeOfOrderId) {
+        this.typeOfOrderId = typeOfOrderId;
     }
 }

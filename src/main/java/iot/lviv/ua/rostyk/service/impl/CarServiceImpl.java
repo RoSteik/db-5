@@ -29,6 +29,11 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
+    public void createTablesWithCursor() {
+        carRepository.createTablesWithCursor();
+    }
+
+    @Override
     public List<Car> findAll() {
         return carRepository.findAll();
     }

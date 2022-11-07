@@ -14,4 +14,6 @@ import java.util.List;
 
 public interface DriverService extends GeneralService<Driver, Integer> {
     List<Car> findCarsByDriverId(Integer driverId);
+    Integer getAverageRating();
+    void addDriverHasCarRelationship(String driverName, String carBrand);
 }

@@ -1,0 +1,11 @@
+USE `rostyks`;
+
+DROP FUNCTION IF EXISTS GetAverageRating;
+DELIMITER //
+CREATE FUNCTION GetAverageRating()
+    RETURNS DECIMAL(8, 2)
+    DETERMINISTIC
+BEGIN
+    RETURN (SELECT AVG(rating) FROM `driver`);
+END //
+DELIMITER ;

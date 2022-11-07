@@ -4,6 +4,7 @@ USE `rostyks`;
 
 DROP TABLE IF EXISTS driver_has_car;
 DROP TABLE IF EXISTS trip;
+DROP TABLE IF EXISTS type_of_order;
 DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS car;
 DROP TABLE IF EXISTS driver;
@@ -11,7 +12,7 @@ DROP TABLE IF EXISTS driver;
 
 CREATE TABLE driver
 (
-    id               BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id               INT AUTO_INCREMENT PRIMARY KEY,
     name             VARCHAR(50) NOT NULL,
     rating           INT         NOT NULL,
     completed_orders INT         NOT NULL,
@@ -20,15 +21,15 @@ CREATE TABLE driver
 
 CREATE TABLE car
 (
-    id    BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id    INT AUTO_INCREMENT PRIMARY KEY,
     brand VARCHAR(50) NOT NULL,
     clas  VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE driver_has_car
 (
-    driver_id BIGINT NOT NULL,
-    car_id    BIGINT NOT NULL,
+    driver_id INT NOT NULL,
+    car_id    INT NOT NULL,
     PRIMARY KEY (driver_id, car_id),
     CONSTRAINT FOREIGN KEY (driver_id) REFERENCES driver (id),
     CONSTRAINT FOREIGN KEY (car_id) REFERENCES car (id)
@@ -36,20 +37,27 @@ CREATE TABLE driver_has_car
 
 CREATE TABLE user
 (
-    id     BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id     INT AUTO_INCREMENT PRIMARY KEY,
     name   VARCHAR(50),
-    rating INT NOT NULL
+    rating INT NOT NULL,
+    type_of_order_id INT NOT NULL
 );
 
 CREATE TABLE trip
 (
-    id          BIGINT PRIMARY KEY AUTO_INCREMENT,
+    id          INT PRIMARY KEY AUTO_INCREMENT,
     start_point VARCHAR(50) NOT NULL,
     end_point   VARCHAR(50) NOT NULL,
-    driver_id   BIGINT      NOT NULL,
-    user_id     BIGINT      NOT NULL,
+    driver_id   INT         NOT NULL,
+    user_id     INT         NOT NULL,
     CONSTRAINT FOREIGN KEY (driver_id) REFERENCES driver (id),
     CONSTRAINT FOREIGN KEY (user_id) REFERENCES user (id)
+);
+
+CREATE TABLE type_of_order
+(
+    id   INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL
 );
 
 insert into `car`
@@ -62,14 +70,14 @@ values (1, 'Toyota1', 'middle'),
        (7, 'Toyota7', 'middle');
 
 insert into `user`
-values (1, 'Sofia', 5),
-       (2, 'Mary', 5),
-       (3, 'Oksana', 5),
-       (4, 'Lesya', 5),
-       (5, 'Zenoviy', 5),
-       (6, 'Liuda', 5),
-       (7, 'Bogdan', 5),
-       (8, 'Andriana', 5);
+values (1, 'Sofia', 5, 1),
+       (2, 'Mary', 5, 3),
+       (3, 'Oksana', 5, 2),
+       (4, 'Lesya', 5, 2),
+       (5, 'Zenoviy', 5, 4),
+       (6, 'Liuda', 5, 1),
+       (7, 'Bogdan', 5, 3),
+       (8, 'Andriana', 5, 4);
 
 insert into `driver`
 values (1, 'Roman', 5, 56, 0),
@@ -91,3 +99,7 @@ values (1, 'a', 'b', 1, 1),
        (3, 'e', 'f', 1, 2),
        (4, 'g', 'h', 4, 3);
 
+INSERT INTO type_of_order (name) VALUES ('Quick' );
+INSERT INTO type_of_order (name) VALUES ('Very far' );
+INSERT INTO type_of_order (name) VALUES ('Ше якийсь');
+INSERT INTO type_of_order (name) VALUES ('І ше якийсь');

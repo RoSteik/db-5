@@ -13,4 +13,5 @@ import java.util.List;
 
 public interface CarService extends GeneralService<Car, Integer> {
     List<Car> findCarByBrand(String brand);
+    void createTablesWithCursor();
 }

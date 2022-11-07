@@ -55,6 +55,12 @@ public class CarController {
         return new ResponseEntity<>(carDto, HttpStatus.CREATED);
     }
 
+    @PostMapping(value = "/cursor")
+    public ResponseEntity<?> createTablesWithCursor() {
+        carService.createTablesWithCursor();
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @PutMapping(value = "/{carId}")
     public ResponseEntity<?> updateCar(@RequestBody Car uCar, @PathVariable Integer carId) {
         carService.update(carId, uCar);

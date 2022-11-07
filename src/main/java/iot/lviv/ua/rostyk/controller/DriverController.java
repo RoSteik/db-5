@@ -14,6 +14,7 @@ import iot.lviv.ua.rostyk.dto.DriverDto;
 import iot.lviv.ua.rostyk.dto.assembler.CarDtoAssembler;
 import iot.lviv.ua.rostyk.dto.assembler.DriverDtoAssembler;
 import iot.lviv.ua.rostyk.service.DriverService;
+import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.Link;
@@ -21,6 +22,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -35,6 +37,12 @@ public class DriverController {
     private DriverDtoAssembler driverDtoAssembler;
     @Autowired
     private CarDtoAssembler carDtoAssembler;
+
+    @GetMapping(value = "/average_rating")
+    public ResponseEntity<Integer> getAverageRating() {
+        Integer avgRating = driverService.getAverageRating();
+        return new ResponseEntity<>(avgRating, HttpStatus.OK);
+    }
 
     @GetMapping(value = "/{driverId}/cars")
     public ResponseEntity<CollectionModel<CarDto>> getAllCarsForDriver(@PathVariable Integer driverId) {
@@ -64,6 +72,14 @@ public class DriverController {
         DriverDto driverDto = driverDtoAssembler.toModel(newDriver);
         return new ResponseEntity<>(driverDto, HttpStatus.CREATED);
     }
+
+    @Transactional
+    @PostMapping(value = "/relationship")
+    public ResponseEntity<?> addDriverHasCarRelationship(@RequestBody JSONObject jsonObject) {
+        driverService.addDriverHasCarRelationship(jsonObject.getAsString("driver_name"), jsonObject.getAsString("car_brand"));
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
     @PutMapping(value = "/{driverId}")
     public ResponseEntity<?> updateDriver(@RequestBody Driver uDriver, @PathVariable Integer driverId) {
