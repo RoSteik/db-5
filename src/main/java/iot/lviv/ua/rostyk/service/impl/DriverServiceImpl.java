@@ -15,7 +15,9 @@ import iot.lviv.ua.rostyk.service.DriverService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DriverServiceImpl implements DriverService {
@@ -37,7 +39,7 @@ public class DriverServiceImpl implements DriverService {
     public List<Car> findCarsByDriverId(Integer driverId) {
         Driver driver = driverRepository.findById(driverId)
                 .orElseThrow(() -> new DriverNotFoundException(driverId));
-        return driver.getCars().stream().toList();
+        return new ArrayList<>(driver.getCars());
     }
 
     @Override
