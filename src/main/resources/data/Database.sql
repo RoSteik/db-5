@@ -3,6 +3,7 @@ CREATE
 USE `rostyks`;
 
 
+
 DROP TABLE IF EXISTS driver_has_car;
 DROP TABLE IF EXISTS trip;
 DROP TABLE IF EXISTS type_of_order;
