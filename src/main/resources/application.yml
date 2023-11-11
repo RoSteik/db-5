@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://google/rostyks?cloudSqlInstance=first-cloud-lab:europe-central2:rostyks&socketFactory=com.google.cloud.sql.mysql.SocketFactory
+    url: jdbc:mysql://34.118.6.159:3306/rostyks
     username: rostyk
     password: rostyk
   jpa:
